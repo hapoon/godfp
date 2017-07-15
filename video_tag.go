@@ -35,6 +35,7 @@ type VideoTag struct {
 	CustParams CustomParameters
 }
 
+// NewVideoTag creates VideoTag struct with default values.
 func NewVideoTag() VideoTag {
 	return VideoTag{
 		Correlator:            uint(time.Now().UnixNano()),
@@ -45,6 +46,7 @@ func NewVideoTag() VideoTag {
 	}
 }
 
+// Create creates URL.
 func (v VideoTag) Create() string {
 	var vURL string
 	if v.IsLive {
