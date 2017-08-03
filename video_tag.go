@@ -18,6 +18,7 @@ type VideoTag struct {
 	target enum.Target
 	IsLive bool
 	// Required Parameters
+	impl                  string
 	Correlator            uint
 	DescriptionURL        string
 	env                   string
@@ -38,6 +39,7 @@ type VideoTag struct {
 // NewVideoTag creates VideoTag struct with default values.
 func NewVideoTag() VideoTag {
 	return VideoTag{
+		impl:                  "s",
 		Correlator:            uint(time.Now().UnixNano()),
 		env:                   "vp",
 		gdfpReq:               1,
@@ -60,6 +62,8 @@ func (v VideoTag) Create() string {
 	}
 	q := VideoTagValues{}
 	// Required parameters
+	// impl
+	q.Set("impl", v.impl)
 	// correlator
 	// https://support.google.com/dfp_premium/answer/1068325#correlator
 	q.Set("correlator", fmt.Sprintf("%d", v.Correlator))
